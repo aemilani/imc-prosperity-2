@@ -20,7 +20,7 @@ class Trader:
             if (len(order_depth.sell_orders) != 0) and (len(order_depth.buy_orders) != 0):
                 best_ask, best_ask_amount = list(order_depth.sell_orders.items())[0]
                 best_bid, best_bid_amount = list(order_depth.buy_orders.items())[0]
-                price_starfruit = (best_ask + best_bid) / 2
+                price_starfruit = price_starfruit * 0.9 + (best_ask + best_bid) / 2 * 0.1
 
             if product == 'AMETHYSTS':
                 acceptable_price = price_amethysts  # Participant should calculate this value
