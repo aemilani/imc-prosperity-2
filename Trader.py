@@ -14,33 +14,48 @@ class Trader:
             order_depth: OrderDepth = state.order_depths[product]
             orders: List[Order] = []
 
-            price_amethysts = 10000
-            price_starfruit = 5000
-
-            if (len(order_depth.sell_orders) != 0) and (len(order_depth.buy_orders) != 0):
-                best_ask, best_ask_amount = list(order_depth.sell_orders.items())[0]
-                best_bid, best_bid_amount = list(order_depth.buy_orders.items())[0]
-                price_starfruit = price_starfruit * 0.9 + (best_ask + best_bid) / 2 * 0.1
+            best_ask, best_ask_amount = list(order_depth.sell_orders.items())[0]
+            best_bid, best_bid_amount = list(order_depth.buy_orders.items())[0]
 
             if product == 'AMETHYSTS':
-                acceptable_price = price_amethysts  # Participant should calculate this value
+                acceptable_price = 10000
+                max_position = 20
+                print("Acceptable price : " + str(acceptable_price))
+                print("Buy Order depth : " + str(len(order_depth.buy_orders)) + ", Sell order depth : " + str(
+                    len(order_depth.sell_orders)))
+
+                if len(order_depth.sell_orders) != 0:
+                    best_ask, best_ask_amount = list(order_depth.sell_orders.items())[0]
+                    if int(best_ask) < acceptable_price:
+                        print("BUY", str(-best_ask_amount) + "x", best_ask)
+                        orders.append(Order(product, best_ask, -best_ask_amount))
+
+                if len(order_depth.buy_orders) != 0:
+                    best_bid, best_bid_amount = list(order_depth.buy_orders.items())[0]
+                    if int(best_bid) > acceptable_price:
+                        print("SELL", str(best_bid_amount) + "x", best_bid)
+                        orders.append(Order(product, best_bid, -best_bid_amount))
+
             elif product == 'STARFRUIT':
-                acceptable_price = price_starfruit
-            print("Acceptable price : " + str(acceptable_price))
-            print("Buy Order depth : " + str(len(order_depth.buy_orders)) + ", Sell order depth : " + str(
-                len(order_depth.sell_orders)))
+                acceptable_price = 5000
+                max_position = 20
+                if (len(order_depth.sell_orders) != 0) and (len(order_depth.buy_orders) != 0):
+                    acceptable_price = (best_ask + best_bid) / 2
+                print("Acceptable price : " + str(acceptable_price))
+                print("Buy Order depth : " + str(len(order_depth.buy_orders)) + ", Sell order depth : " + str(
+                    len(order_depth.sell_orders)))
 
-            if len(order_depth.sell_orders) != 0:
-                best_ask, best_ask_amount = list(order_depth.sell_orders.items())[0]
-                if int(best_ask) < acceptable_price:
-                    print("BUY", str(-best_ask_amount) + "x", best_ask)
-                    orders.append(Order(product, best_ask, -best_ask_amount))
+                if len(order_depth.sell_orders) != 0:
+                    best_ask, best_ask_amount = list(order_depth.sell_orders.items())[0]
+                    if int(best_ask) < acceptable_price:
+                        print("BUY", str(-best_ask_amount) + "x", best_ask)
+                        orders.append(Order(product, best_ask, -best_ask_amount))
 
-            if len(order_depth.buy_orders) != 0:
-                best_bid, best_bid_amount = list(order_depth.buy_orders.items())[0]
-                if int(best_bid) > acceptable_price:
-                    print("SELL", str(best_bid_amount) + "x", best_bid)
-                    orders.append(Order(product, best_bid, -best_bid_amount))
+                if len(order_depth.buy_orders) != 0:
+                    best_bid, best_bid_amount = list(order_depth.buy_orders.items())[0]
+                    if int(best_bid) > acceptable_price:
+                        print("SELL", str(best_bid_amount) + "x", best_bid)
+                        orders.append(Order(product, best_bid, -best_bid_amount))
 
             result[product] = orders
 
