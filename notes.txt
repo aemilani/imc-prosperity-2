@@ -1,0 +1,24 @@
+Algorithmic trading:
+- Amethysts price: 10000, steady
+- Starfruit price: 5000, volatile
+
+Manual trading:
+- Only two offers
+- Lowest bid above the reserve price is accepted
+- Sell price: 1000 SS
+- Reserve price different for each goldfish
+- The reserve price will be no lower than 900 and no higher than 1000.
+- The probability scales linearly from least likely at 900 to most likely at 1000.
+
+Subtitles:
+- Life boat with bengal tiger sighted off the coast
+- Lottery winnder spends everythin on private island
+- Captain Nemo exposed: He only get 19.999 leagues
+- Davy Jones opens salon for tentacle-faced companions
+- Meerkat videos now more popular than cat videos online
+- Birds of paradise dance festival about to kick off
+- Concerns about disappearing snakes
+- Annual falling coconut victims at 312
+- Black pearl fined for illegal docking
+- Virgin cocktails not only for virgins
+- Scientists creat non-abrasive sand
