@@ -33,16 +33,18 @@ class Trader:
                 max_position = 20
                 max_buy_size = min(max_position, max_position - curr_position)
                 max_sell_size = max(-max_position, -max_position - curr_position)
-                thr_h = fair_value + 2
                 thr_l = fair_value - 2
-                if best_bid:
-                    buy_price = min(thr_l, best_bid)
-                else:
-                    buy_price = thr_l
-                if best_ask:
-                    sell_price = max(thr_h, best_ask)
-                else:
-                    sell_price = thr_h
+                thr_h = fair_value + 2
+                buy_price = thr_l
+                sell_price = thr_h
+                # if best_bid:
+                #     buy_price = min(thr_l, best_bid)
+                # else:
+                #     buy_price = thr_l
+                # if best_ask:
+                #     sell_price = max(thr_h, best_ask)
+                # else:
+                #     sell_price = thr_h
 
                 print("BUY", str(max_buy_size) + "x", buy_price)
                 orders.append(Order(product, buy_price, max_buy_size))
