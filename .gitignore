@@ -3,3 +3,5 @@
 logs/
 data/
 save/
+__pycache__
+backtests/

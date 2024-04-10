@@ -79,20 +79,26 @@ class Trader:
                 max_position = 20
                 max_buy_size = min(max_position, max_position - curr_position)
                 max_sell_size = max(-max_position, -max_position - curr_position)
-                if len(bids[product]) >= 20:
+
+                w_roll = 9
+                std_mul = 0
+
+                if len(bids[product]) >= w_roll:
                     bid_arr = np.array(bids[product])
                     ask_arr = np.array(asks[product])
                     mid_arr = (bid_arr + ask_arr) / 2
-                    bol_h = mid_arr[-20:].mean() + mid_arr[-20:].std()
-                    bol_l = mid_arr[-20:].mean() - mid_arr[-20:].std()
+                    bol_h = mid_arr[-w_roll:].mean() + std_mul * mid_arr[-w_roll:].std()
+                    bol_l = mid_arr[-w_roll:].mean() - std_mul * mid_arr[-w_roll:].std()
                     bol_m = (bol_h + bol_l) / 2
 
                     if (curr_position == 0) and (best_ask <= bol_l):
-                        print("BUY", str(-best_ask_amount) + "x", best_ask)
-                        orders.append(Order(product, best_ask, -best_ask_amount))
+                        size = min(max_buy_size, -best_ask_amount)
+                        print("BUY", str(size) + "x", best_ask)
+                        orders.append(Order(product, best_ask, size))
                     if (curr_position == 0) and (best_bid >= bol_h):
-                        print("SELL", str(-best_bid_amount) + "x", best_bid)
-                        orders.append(Order(product, best_bid, -best_bid_amount))
+                        size = max(max_sell_size, -best_bid_amount)
+                        print("SELL", str(size) + "x", best_bid)
+                        orders.append(Order(product, best_bid, size))
                     if curr_position < 0:
                         print("BUY", str(-curr_position) + "x", int(bol_m))
                         orders.append(Order(product, int(bol_m), -curr_position))

@@ -4,3 +4,4 @@ jsonpickle
 notebook
 matplotlib
 scipy
+statsmodels
