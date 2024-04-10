@@ -3,3 +3,4 @@ pandas
 jsonpickle
 notebook
 matplotlib
+scipy
