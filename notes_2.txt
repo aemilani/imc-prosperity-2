@@ -1,0 +1,27 @@
+Orchides:
+- Sunlight < 7 hours/day --> production decreases with 4% for every 10 minutes
+- Ideal humidity: Betwene 60% and 80%. Outside these limits, production falls with 2% for every 5%
+  point of humidity change
+- Shipping costs and import and export tariffs
+- Storage space for Orchids (max 5000?). Costs 0.1 SS per Orchid per timestamp (only for long positions)
+- Position limit: 100
+
+-------------------------------------------------------------------------------------------------
+
+- Production will have an effect of the definiton of a fair value for Orchids
+- Storage cost will only be a cost deducted for net long positions with no premimum from shorts.
+- Each day in ORCHIDs trading is equivalent to 12 hours on the island. You can assume the ORCHID
+  quality doesn't deteriorate overnight
+
+- if you want to purchase 1 unit of ORCHID from the south, you will purchase at the askPrice,
+  pay the TRANSPORT_FEES, IMPORT_TARIFF
+- if you want to sell 1 unit of ORCHID to the south, you will sell at the bidPrice,
+  pay the TRANSPORT_FEES, EXPORT_TARIFF
+
+- Average sunlight per hour is 2500 units. The data/plot shows the instantaneous rate of sunlight
+  on any moment of the day.
+- I think I am starting to understand it. The conversions are like a dark pool where you can
+ liqudize your position asap with the cost of several fees. At the same time, the orderdepth
+ provide you a market order book where you can trade without fees. What's more important is that
+ the trend of order book is highly sensitive to humanity, sunlight and fees. The arbitrage opportunity
+ lies in there. Correct me if I am wrong ?
