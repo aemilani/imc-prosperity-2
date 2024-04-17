@@ -1,0 +1,21 @@
+Gift basket:
+- 6 Strawberries
+- 4 Chocolates
+- 1 Rose
+
+Treasure hunt:
+
+- You share the spoils with everyone that marks the same spot.
+- Every spot has its treasure multiplier (up to 100) and the number of hunters (up to 8).
+- The spot's total treasure is the product of the base treasure (7500, same for all spots)
+  and the spot's specific treasure multiplier.
+- The resulting amount is then divided by the sum of the hunters and the percentage of all
+  the expeditions (from other players) that took place there.
+- For example, if a field has 5 hunters, and 10% of all the expeditions (from all the other players)
+  are also going there, the prize you get from that field will be divided by 15.
+- After the division, expedition costs apply (if there are any), and profit is what remains.
+- Max 3 expeditions
+- First expedition is free
+- Fee for embarking upon a second expedition is 25000, and for third it's 75000.
+- Second and third expeditions are optional: you are not required to do all 3.
+- Order of submitted expeditions does not matter for grading.

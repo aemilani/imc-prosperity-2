@@ -22,21 +22,16 @@ class Trader:
             bids = {}
             asks = {}
 
-        # Print traderData and Observations ---------------------------------------------------------------------------
-        print("traderData: " + state.traderData)
-        print("Observations: " + str(state.observations))
-
         # Run the loop per product ------------------------------------------------------------------------------------
         result = {}
         for product in state.order_depths:
+            print(product)
             if product not in bids:
                 bids[product] = []
             if product not in asks:
                 asks[product] = []
 
             order_depth: OrderDepth = state.order_depths[product]
-            print("Buy Order depth : " + str(len(order_depth.buy_orders)) + ", Sell order depth : " + str(
-                len(order_depth.sell_orders)))
 
             if product in state.position:
                 if state.position[product]:
@@ -46,6 +41,7 @@ class Trader:
             else:
                 curr_position = 0
 
+            print(f'Current position: {curr_position}')
             orders: List[Order] = []
 
             if len(order_depth.buy_orders) != 0:
@@ -59,6 +55,10 @@ class Trader:
 
             bids[product].append(best_bid)
             asks[product].append(best_ask)
+
+            if len(bids[product]) > 100:
+                bids[product] = bids[product][1:]
+                asks[product] = asks[product][1:]
 
             # AMETHYSTS -----------------------------------------------------------------------------------------------
             if product == 'AMETHYSTS':
@@ -111,7 +111,9 @@ class Trader:
 
             # ORCHIDS -------------------------------------------------------------------------------------------------
             elif product == 'ORCHIDS':
-                max_position = 20
+                conversions = -curr_position
+
+                max_position = 100
                 max_buy_size = min(max_position, max_position - curr_position)
                 max_sell_size = max(-max_position, -max_position - curr_position)
 
@@ -127,7 +129,8 @@ class Trader:
 
                 # south_data[product].append({'bid_price': bid_price, 'ask_price': ask_price,
                 #                             'transport_fees': transport_fees, 'export_tariff': export_tariff,
-                #                             'import_tariff': import_tariff, 'sunlight': sunlight, 'humidity': humidity})
+                #                             'import_tariff': import_tariff, 'sunlight': sunlight,
+                #                             'humidity': humidity})
 
                 # Arbitrage -------------------------------------------------------------------------------------------
                 effective_bid_price = bid_price - transport_fees - export_tariff
@@ -137,15 +140,13 @@ class Trader:
                 ask_1, ask_1_amount = list(order_depth.sell_orders.items())[0]
 
                 if bid_1 > effective_ask_price:  # short
-                    sell_size = min(max_sell_size, bid_1_amount)
+                    sell_size = max(max_sell_size, -bid_1_amount)
                     print("SELL", str(sell_size) + "x", bid_1)
                     orders.append(Order(product, bid_1, sell_size))
-                    conversions = sell_size
                 elif ask_1 < effective_bid_price:  # long
-                    buy_size = min(max_buy_size, ask_1_amount)
-                    print("SELL", str(buy_size) + "x", ask_1)
+                    buy_size = min(max_buy_size, -ask_1_amount)
+                    print("BUY", str(buy_size) + "x", ask_1)
                     orders.append(Order(product, ask_1, buy_size))
-                    conversions = buy_size
 
             result[product] = orders
 
