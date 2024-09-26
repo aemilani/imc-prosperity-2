@@ -1,0 +1,11 @@
+Algo trading:
+- Premium per coupon: 637.63 SS (in the video)
+- Coconut Coupons give the right to buy Coconut at a certain price at some time in future.
+  Certain price = 10000 and some time in future = 250 trading days, each round is 1 trading day.
+- Position limits: COCONUT: 300, COCONUT_COUPON: 600
+
+Manual trading:
+- Goldfish have heard rumours about what other inhabitants offered for their scuba gear last time.
+- So, for the second bid only, they'll also consider the average of all second bids by other traders.
+- They'll trade when the second bid is above the average of the the seconds bids of all participants.
+- If it is below the average, the probability of the deal decreases.
