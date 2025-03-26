@@ -1,7 +1,5 @@
 .idea/
 .ipynb_checkpoints/
-logs/
-data/
 save/
 __pycache__
 backtests/
